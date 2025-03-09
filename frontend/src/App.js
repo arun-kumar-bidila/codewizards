@@ -1,16 +1,18 @@
 import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Signup from "./Signup";
 import Skills from "./Skills";
+import LandingPage from "./landingpage";
+import Jobseeking from "./jobseeking";
 
 const App = () => {
   return (
-    <div className="container">
-      <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/skills/:userId" element={<Skills />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/job-seeking" element={<Jobseeking />} />
+      <Route path="/skills/:userId" element={<Skills />} />
+    </Routes>
   );
 };
 

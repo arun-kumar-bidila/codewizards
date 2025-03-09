@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Skills = () => {
   const { userId } = useParams();
   const [selectedSkills, setSelectedSkills] = useState([]);
+
+  const navigate = useNavigate();
 
   // Categorized Skills
   const skillsCategories = {
@@ -35,6 +37,8 @@ const Skills = () => {
 
       if (response.ok) {
         alert("Skills updated successfully!");
+
+        navigate('/home');
       } else {
         alert("Error updating skills.");
       }
