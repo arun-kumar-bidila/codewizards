@@ -1,30 +1,38 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Home = () => {
     const navigate = useNavigate();
+    const [showWelcome, setShowWelcome] = useState(true); // Track initial view
+
+    const handleNavigation = (path) => {
+        navigate(path);
+        setShowWelcome(false); // Hide welcome message after first navigation
+    };
 
     return (
         <div>
             {/* Navbar */}
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Main Navigation">
                 <div className="container">
-                    <a className="navbar-brand" href="/">MyApp</a>
-                    <div className="collapse navbar-collapse">
-                        <ul className="navbar-nav ms-auto">
-                            <li className="nav-item">
-                                <button className="btn btn-outline-light me-2" onClick={() => navigate("/job-selection")}>
-                                    Job Selection
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarNav">
+                        <ul className="navbar-nav w-100 d-flex justify-content-between">
+                            <li className="nav-item flex-grow-1">
+                                <button className="btn btn-outline-light w-100 border-0" onClick={() => handleNavigation("/home/suggested-job")} aria-label="Navigate to Suggested Job">
+                                    Suggested Job
                                 </button>
                             </li>
-                            <li className="nav-item">
-                                <button className="btn btn-outline-light me-2" onClick={() => navigate("/resume-builder")}>
+                            <li className="nav-item flex-grow-1">
+                                <button className="btn btn-outline-light w-100 border-0" onClick={() => handleNavigation("/home/resume-builder")} aria-label="Navigate to Resume Builder">
                                     Resume Builder
                                 </button>
                             </li>
-                            <li className="nav-item">
-                                <button className="btn btn-outline-light" onClick={() => navigate("/profile")}>
+                            <li className="nav-item flex-grow-1">
+                                <button className="btn btn-outline-light w-100 border-0" onClick={() => handleNavigation("/home/profile")} aria-label="Navigate to Profile">
                                     Profile
                                 </button>
                             </li>
@@ -33,10 +41,19 @@ const Home = () => {
                 </div>
             </nav>
 
-            {/* Page Content */}
-            <div className="container mt-5 text-center">
-                <h1>Welcome to the Home Page</h1>
-                <p>Select an option from the navigation bar to continue.</p>
+            {/* Show Welcome Message Initially */}
+            <div className="container mt-5">
+                {showWelcome ? (
+                    <div className="text-center">
+                        <h1 className="mb-3">Welcome to CareerHub</h1>
+                        <p className="text-muted small">
+                            A platform designed to help you build a strong career. Navigate through job opportunities, 
+                            enhance your resume, and manage your professional profile effortlessly.
+                        </p>
+                    </div>
+                ) : (
+                    <Outlet />
+                )}
             </div>
         </div>
     );
