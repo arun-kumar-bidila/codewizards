@@ -17,7 +17,7 @@ const Signup = () => {
         }
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) =>  {
         e.preventDefault();
 
         // Simulating user object for local storage
@@ -35,7 +35,7 @@ const Signup = () => {
         navigate(`/skills/${userData._id}`); // Redirect after account creation
 
         // Uncomment this part to enable backend API call
-        /*
+        
         try {
             const response = await fetch("http://localhost:2000/api/users", {
                 method: "POST",
@@ -54,7 +54,7 @@ const Signup = () => {
         } catch (err) {
             setError("Server error. Please try again.");
         }
-        */
+        
     };
 
     return (

@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
         enum: ["Undergraduate", "Graduate"],
        required:true 
     },
-    
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

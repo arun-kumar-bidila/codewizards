@@ -60,7 +60,8 @@ const Skills = () => {
         console.log("Job Prediction Response:", predictionData);
 
         if (predictionResponse.ok) {
-          navigate(`/job-suggestions/${userId}`, { state: { predictedJob: predictionData.prediction, selectedSkills } });
+          // navigate(`/job-suggestions/${userId}`, { state: { predictedJob: predictionData.prediction, selectedSkills } });
+          navigate('/home')
         } else {
           alert("Error getting job prediction.");
         }
